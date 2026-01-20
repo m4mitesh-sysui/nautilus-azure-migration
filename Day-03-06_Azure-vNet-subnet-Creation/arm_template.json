@@ -1,0 +1,86 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+
+  "parameters": {
+    "vnetName": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "vnetAddressPrefix": {
+      "type": "string"
+    },
+    "subnetName": {
+      "type": "string"
+    },
+    "subnetAddressPrefix": {
+      "type": "string"
+    },
+    "privateEndpointVNetPolicies": {
+      "type": "string"
+    },
+    "privateEndpointNetworkPolicies": {
+      "type": "string"
+    },
+    "privateLinkServiceNetworkPolicies": {
+      "type": "string"
+    },
+    "enableDdosProtection": {
+      "type": "bool"
+    }
+  },
+
+  "variables": {},
+
+  "resources": [
+    {
+      "type": "Microsoft.Network/virtualNetworks",
+      "apiVersion": "2024-07-01",
+      "name": "[parameters('vnetName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[parameters('vnetAddressPrefix')]"
+          ]
+        },
+        "privateEndpointVNetPolicies": "[parameters('privateEndpointVNetPolicies')]",
+        "subnets": [
+          {
+            "name": "[parameters('subnetName')]",
+            "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('subnetName'))]",
+            "properties": {
+              "addressPrefixes": [
+                "[parameters('subnetAddressPrefix')]"
+              ],
+              "delegations": [],
+              "privateEndpointNetworkPolicies": "[parameters('privateEndpointNetworkPolicies')]",
+              "privateLinkServiceNetworkPolicies": "[parameters('privateLinkServiceNetworkPolicies')]"
+            },
+            "type": "Microsoft.Network/virtualNetworks/subnets"
+          }
+        ],
+        "virtualNetworkPeerings": [],
+        "enableDdosProtection": "[parameters('enableDdosProtection')]"
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "apiVersion": "2024-07-01",
+      "name": "[concat(parameters('vnetName'), '/', parameters('subnetName'))]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]"
+      ],
+      "properties": {
+        "addressPrefixes": [
+          "[parameters('subnetAddressPrefix')]"
+        ],
+        "delegations": [],
+        "privateEndpointNetworkPolicies": "[parameters('privateEndpointNetworkPolicies')]",
+        "privateLinkServiceNetworkPolicies": "[parameters('privateLinkServiceNetworkPolicies')]"
+      }
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+#-----------------------day-03---------------------#
+The Nautilus DevOps team is strategizing the migration of a portion of their 
+infrastructure to the Azure cloud. Recognizing the scale of this undertaking, 
+they have opted to approach the migration in incremental steps rather than as
+a single massive transition. To achieve this, they have segmented large tasks
+into smaller, more manageable units. This granular approach enables the team
+to execute the migration in gradual phases, ensuring smoother implementation 
+and minimizing disruption to ongoing operations. 
+
+1) Create a Virtual Network (VNet) named nautilus-vnet in the us region with any
+    IPv4 CIDR block.
+
+
+#-----------------------day-04---------------------#
+The Nautilus DevOps team is strategically planning the migration of a portion of their 
+infrastructure to the Azure cloud. Acknowledging the magnitude of this endeavor, 
+they have chosen to tackle the migration incrementally rather than as a single, 
+massive transition. Their approach involves creating Virtual Networks (VNets) as the 
+initial step, as they will be provisioning various services under different VNets. 
+
+1) Create a Virtual Network (VNet) named "datacenter-vnet" in the us region with 
+    192.168.0.0/24 IPv4 CIDR.
+
+#-----------------------day-05_06---------------------#
+The Nautilus DevOps team is strategizing the migration of a portion of their 
+infrastructure to the Azure cloud. Recognizing the scale of this undertaking, 
+they have opted to approach the migration in incremental steps rather than as a 
+single massive transition. For this task, 
+
+1) create a Virtual Network (VNet) named "datacenter-vnet" and one subnet named 
+    "datacenter-subnet" within the VNet in the us region. 
+2) Make sure the IPv4 address range is 10.0.0.0/16.
